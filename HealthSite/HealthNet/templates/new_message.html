@@ -1,0 +1,52 @@
+   {% extends 'base.html' %}
+    {% block content %}
+        <title>New Message</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        td{
+            left: 30px;
+        }
+
+    </style>
+
+        {% if ex3 %}
+            <h1 class="center">Reply to {{ otheruser.first_name }} {{ otheruser.last_name }}</h1>
+        {% else %}
+            <h1 class="center">Send a New Message</h1>
+        {% endif %}
+
+        <form class="form-horizontal" method="POST" action="">
+            {% csrf_token %}
+                <table>
+                    {% for field in form %}
+                        {% ifequal field.label ex %}
+                             <tr><td style="display: none">{{ field.label_tag }}{{ field }}</td></tr>
+                        {% endifequal %}
+                        {% ifequal field.label ex2 %}
+                             <tr><td style="display: none">{{ field.label_tag }}{{ field }}</td></tr>
+                        {% endifequal %}
+                        {% if ex3 %}
+                            {% ifequal field.label ex3 %}
+                                 <tr><td style="display: none">{{ field.label_tag }}{{ field }}</td></tr>
+                            {% endifequal %}
+                        {% else %}
+                             {% ifequal field.label 'To' %}
+                                <tr><td>{{ field.label_tag }}{{ field }}</td></tr>
+                             {% endifequal %}
+                        {% endif %}
+                        {% ifequal field.label '' %}
+                             <tr style="max-width: 200px"><td>{{ field.label_tag }}{{ field }}</td></tr>
+                        {% endifequal %}
+
+
+                    {% endfor %}
+
+                </table>
+
+
+            <input class="btn btn-success btn-m" type="submit" name="submit"  value="Send" style="margin-top: 10px; background-color: #5CCFCF; color: #316497"/>
+            <a  id="cancel" onclick="history.back(-1)" class="btn btn-success btn-m">Cancel</a>
+        </form>
+             {% endblock %}

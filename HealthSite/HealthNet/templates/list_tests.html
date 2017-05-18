@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <a class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497" href="{% url 'create_test' %}">New Test</a>
+    <title>View Tests</title>
+    <style>
+        table {
+            width: 90vw;
+            margin: auto;
+            text-align: left;
+        }
+
+        td, th {
+            padding: 10px;
+
+        }
+
+        #results {
+            max-width: 300px;
+        }
+
+        #options {
+            width: 100px;
+        }
+
+
+        p {
+            background-color: #eeeeee;
+            padding: 20px;
+        }
+
+        hr {
+            display: block;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #000000;
+        }.messages{
+            top: 20px;
+        }
+        {% if isEmpty %}
+            .ur{
+                width: 60vw;margin-left: 5vw
+            }
+        {% endif %}
+
+
+    </style>
+
+
+</head>
+    <h1 class="center">Unreleased Tests</h1>
+    <div class="Tests">
+        {% if tests %}
+            <table class="ur">
+                <tr>
+                    <th>Name</th>
+                    <th>Date/Time</th>
+                    <th>Patient</th>
+                    <th>Results</th>
+
+                </tr>
+                {% for tst in tests %}
+                    {% if tst.release == False %}
+                    <tr>
+                        <td>{{ tst.name }}</td>
+                        <td>{{ tst.testDate }}</td>
+                        <td>{{ tst.testPatient.username }}</td>
+                        <td id="results">{{ tst.results }}</td>
+                        <td><a class="btn btn-success btn-m" href="{% url 'release_test' tst.id %}"  style="background-color: #5CCFCF;color: #316497">Release Test</a></td>
+
+
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No tests.</p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <h1 class="center">Released Tests</h1>
+    <div class="Tests">
+        {% if tests %}
+            <table style="width: 60vw;margin-left: 5vw">
+                <tr>
+                    <th>Name</th>
+                    <th>Date/Time</th>
+                    <th>Patient</th>
+                    <th>Results</th>
+                    <th></th>
+                </tr>
+                {% for tst in tests %}
+                    {% if tst.release == True %}
+                    <tr>
+                        <td>{{ tst.name }}</td>
+                        <td>{{ tst.testDate }}</td>
+                        <td>{{ tst.testPatient.username }}</td>
+                        <td id="results">{{ tst.results }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No tests.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

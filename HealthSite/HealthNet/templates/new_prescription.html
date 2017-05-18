@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+        {% block content %}
+            <title>Create New Prescription</title>
+    <h1 class="center">Create a New Prescription</h1>
+
+    <form class="form-horizontal" method="POST" action="">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <input class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" type="submit" name="submit" style="background-color: #5CCFCF" value="Create Prescription" />
+        <a class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" href="{% url 'prescriptions' patient1.id %}">Cancel</a>
+    </form>
+         {% endblock %}
+
+
+

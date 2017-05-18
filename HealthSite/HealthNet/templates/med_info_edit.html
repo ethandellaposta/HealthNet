@@ -1,0 +1,33 @@
+
+    {% extends 'base.html' %}
+    {% block content %}
+        <title>Edit Medical Information</title>
+        <head>
+            <style>
+                .content{
+                    width: 100vw;
+                }
+                form{
+                    background-color: #C1F1F1;
+                }
+                input{
+                     margin-bottom: 20px;
+                }
+            </style>
+        </head>
+
+        <div class="content">
+        <h1 class ="center">Register with HealthNet</h1>
+
+
+
+        <form id="PatientMedForm" method="POST" style="text-align: center">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input type="submit" name="submit" class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" value="Save Changes" />
+             <a class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" href="{% url 'patient_info_emp' patient.id %}">Cancel</a>
+        </form>
+        </div>
+
+    {% endblock %}

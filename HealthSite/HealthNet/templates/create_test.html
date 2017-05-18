@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Create New Test</title>
+
+    <h1 class="center">Create a New Test</h1>
+
+     <form class="form-horizontal" method="POST" action="">
+            {% csrf_token %}
+                <table>
+                    {% for field in form %}
+                        {% ifnotequal field.label ex %}
+                            <tr><td>{{ field.label_tag }}{{ field }}</td></tr>
+
+                        {% else %}
+                             <tr><td style="display: none">{{ field.label_tag }}{{ field }}</td></tr>
+                        {% endifnotequal %}
+                    {% endfor %}
+
+                </table>
+
+
+
+
+
+
+
+
+
+            <input class="btn btn-success btn-m" style="margin-top: 10px; background-color: #5CCFCF;color: #316497;" type="submit" name="submit" style="background-color: #5CCFCF" value="Create Test" />
+            <a class="btn btn-success btn-m" style="margin-top: 10px; background-color: #5CCFCF;color: #316497;" href="{% url 'test_results' %}">Cancel</a>
+        </form>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+        {% block content %}
+
+    <title>Transfer Patient</title>
+    <style>
+
+        form p {
+            margin: 15px 0;
+        }
+
+        .header {
+            text-align: left;
+            margin-left: 15px;
+        }
+
+    </style>
+
+    <h1 class="header">Request to transfer a patient</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form">
+            {{ form.as_p }}
+        </div>
+
+        <div class="options">
+            {% if not is_second %}
+                <input class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" type="submit" name="submit" style="background-color: #5CCFCF" value="Continue" />
+            {% else %}
+                <input class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" type="submit" name="submit" style="background-color: #5CCFCF" value="Submit" />
+            {% endif %}
+
+            {% if admin %}
+                <a class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" href="{% url 'patients' %}">Cancel</a>
+            {% else %}
+                <a class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" href="{% url 'patient_list' %}">Cancel</a>
+            {% endif %}
+        </div>
+
+    </form>
+
+{% endblock %}

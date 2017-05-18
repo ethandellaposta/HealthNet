@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>{{ patient1.first_name }} {{ patient1.last_name }}'s Information</title>
+
+<head>
+    <style>
+        li{
+            position: relative;
+
+            display: block;
+            margin-bottom: 10px;
+        }
+
+         .edit{
+            left: 120px;
+            padding-top: 20px;
+         }
+
+    </style>
+</head>
+
+{% if patient1.first_name == '' %}
+    <h1><em>{{ patient1.username }}</em></h1>
+{% else %}
+    <h1><em>{{ patient1.first_name }} {{ patient1.last_name }}'s information </em></h1>
+{% endif %}
+
+    <div class="parent">
+        <div class="list-item"><strong>First: </strong>{{ patient1.first_name }}</div>
+        <div class="list-item"><strong>Last: </strong>{{ patient1.last_name }}</div>
+        <div class="list-item"><strong>Email: </strong>{{ patient1.email }}</div>
+        <div class="list-item"><strong>Medical History: </strong>{{ patient1.medical_history }} </div>
+        <div class="list-item"><strong>Known Allergies: </strong>{{ patient.known_allergies }}</div>
+        <div class="list-item"><strong>Current Medications: </strong>{{ patient.current_medications }}</div>
+        <div class="list-item"><strong>Medical Conditions: </strong>{{ patient.medical_conditions }}</div>
+        <div class="list-item"><strong>Insurance Information: </strong>{{ patient1.insurance_information }}</div>
+        <div class="list-item"><strong>Address: </strong>{{ patient1.street }} {{ patient1.city }} {{ patient1.state }} {{ patient1.country }} {{ patient1.zip }}</div>
+        <div class="list-item"><strong>Emergency Contact: </strong>{{ patient1.emergency_cname }} - {{ enumber }}</div>
+        <div class="list-item"><strong>Preferred Hospital: </strong>{{ patient1.hospital }}</div>
+        <div class="list-item"><strong>Doctor: </strong>{{ patient1.patient_doctor }}</div>
+        <div class="list-item"><strong>Number: </strong>{{ number }}</div>
+        <div class="list-item"><strong>Patient Admission Status: </strong>{{ patient1.hospital_status }}</div>
+        <div class="edit"><a href="{% url 'med_info_edit' patient1.id%}">Update Medical Info <i class="fa fa-pencil" aria-hidden="true"></i></a></div>
+        <div class="edit"><a href="{% url 'prescriptions' patient1.id%}">View Prescriptions <i class="fa fa-folder-open" aria-hidden="true"></i></a></div>
+        {% if patient1.hospital_status == patient1.ADMITTED %}
+            {% if doctor %}
+                <div class="edit"><a href="{% url 'change_hosp_status' patient1.id %}">Discharge Patient
+                    <i class="fa fa-hospital-o" aria-hidden="true"></i></a></div>
+            {% endif %}
+        {% else %}
+            <div class="edit"><a href="{% url 'change_hosp_status' patient1.id %}">Admit Patient
+                <i class="fa fa-hospital-o" aria-hidden="true"></i></a></div>
+        {% endif %}
+    </div>
+
+{% endblock %}

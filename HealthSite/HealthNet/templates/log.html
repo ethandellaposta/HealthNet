@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+
+        table {
+            width: 90vw;
+            margin: auto;
+            text-align: left;
+        }
+
+        td, th {
+            padding: 10px;
+
+        }
+
+        #results {
+            max-width: 300px;
+        }
+
+        #options {
+            width: 100px;
+        }
+
+
+        p {
+            background-color: #eeeeee;
+            padding: 20px;
+        }
+
+        hr {
+            display: block;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #000000;
+        }.messages{
+            top: 20px;
+        }
+        {% if isEmpty %}
+            .ur{
+                width: 60vw;margin-left: 5vw
+            }
+        {% endif %}
+
+
+    </style>
+    <div style="margin-top: 10px; margin-left: 20px;"><a id="cancel" class="btn btn-success btn-m"  href="{% url 'time_entry' %}">New Time Frame</a></div>
+
+    <h1 class="center">System Log</h1>
+
+    <div class="Entry">
+        {% if entries %}
+            <table class="ur">
+                <tr>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Time</th>
+
+                </tr>
+                {% for ent in entries %}
+                    {% if ent.date >= start %}
+                        {% if ent.date <= end %}
+                            <tr>
+                                <td>{{ ent.requester }}</td>
+                                <td>{{ ent.action }}</td>
+                                <td>{{ ent.date }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No entries.</p>
+        {% endif %}
+    </div>
+
+
+
+    <hr>
+
+
+
+    <h1 class="center">System Statistics</h1>
+
+    <div class="Entry">
+        {% if entries %}
+            <table class="ur">
+                <tr>
+                    <th>Action</th>
+                    <th>Occurrence</th>
+                </tr>
+                <tr>
+                    <td>Patient Account Creation</td>
+                    <td>{{ createdPatients }}</td>
+                </tr>
+                <tr>
+                    <td>Patient Admitted</td>
+                    <td>{{ admittedPatients }}</td>
+                </tr>
+                <tr>
+                    <td>Patient Discharged</td>
+                    <td>{{ dischargedPatients }}</td>
+                </tr>
+                <tr>
+                    <td>Appointment Creation</td>
+                    <td>{{ createdApp }}</td>
+                </tr>
+                <tr>
+                    <td>Appointment Accepted</td>
+                    <td>{{ acceptedApp }}</td>
+                </tr>
+                <tr>
+                    <td>Appointment rejected</td>
+                    <td>{{ rejectedApp }}</td>
+                </tr>
+                <tr>
+                    <td>Prescription Creation</td>
+                    <td>{{ prescrip }}</td>
+                </tr>
+                <tr>
+                    <td>Test Creation</td>
+                    <td>{{ test }}</td>
+                </tr>
+                <tr>
+                    <td>Patient Transfer</td>
+                    <td>{{ trans }}</td>
+                </tr>
+            </table>
+        {% endif %}
+{% endblock %}

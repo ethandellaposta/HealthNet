@@ -1,0 +1,156 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>View Appointments</title>
+
+    <style>
+
+        ul.x li a{
+            color: #053563;
+        }
+
+
+
+        table {
+            width: 90vw;
+            margin: auto;
+            text-align: left;
+        }
+
+        td, th {
+            padding: 10px;
+
+        }
+
+        #reason {
+            width: 30vw;
+        }
+
+        #options {
+            width: 30vw;
+            display: inline;
+        }
+
+
+        p {
+            background-color: #eeeeee;
+            padding: 20px;
+        }
+         #txte{
+            opacity: 0;
+            margin-left: -25px;
+             margin-top: -5px;
+            transition: all 0.5s;
+            background-color: transparent;
+            position:absolute;
+
+                 }
+
+        .x a:hover + #txte {
+            opacity: 1;
+        }
+        #txtd{
+            opacity: 0;
+            margin-left: -32px;
+             margin-top: -5px;
+            transition: all 0.5s;
+            background-color: transparent;
+            position:absolute;
+
+                 }
+
+        .x a:hover + #txtd {
+            opacity: 1;
+        }
+        .edit {
+            height: 2px;
+            line-height: 2px;
+            vertical-align: middle;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 35px;
+        }
+        .delete {
+            height: 2px;
+            line-height: 2px;
+            vertical-align: middle;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 35px;
+        }
+        i{
+            padding-bottom: 5px;
+        }
+        li{
+            float: left;
+        }
+        #reason {
+            width: 30vw;
+        }
+
+
+    </style>
+
+
+
+</head>
+
+    <div class="appointments">
+        {% if appointments %}
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Reason</th>
+                    <th>Time</th>
+                    <th>Doctor</th>
+                    <th>Status</th>
+                </tr>
+                {% for appt in appointments %}
+                    <tr>
+                        <td id="options">
+                            <ul class="x" style="display: block; list-style: none">
+                                <li class="edit"><a href="{% url 'edit_appointment' appt.id %}" ><i style="background-color: transparent" class="glyphicon glyphicon-edit"></i></a><p id="txte">Edit</p></li>
+                                {% if not nurse %}
+                                    <li class="delete"><a onclick="return confirm('Would you like to delete this appointment?')" href="{% url 'delete_appointment' appt.id %}"><i class="glyphicon glyphicon-trash"></i></a><p id="txtd">Delete</p></li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                        <td id="reason">{{ appt.reason }}</td>
+                        <td>{{ appt.timeToString }}</td>
+                        <td>{{ appt.doctor }}</td>
+                        <td>{{ appt.accept_state }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="5" class="options">
+                        <a href="{% url 'base_calendar' %}" class="btn btn-success btn-m" style="color: #316497;background-color: #5CCFCF">
+                            Back to Calendar
+                        </a>
+                        {% if not nurse %}
+                            <a href="{% url 'create_appointment' %}" class="btn btn-success btn-m" style="color: #316497;background-color: #5CCFCF">
+                                Create Appointment
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        {% else %}
+            <p>No current appointments. Click on "Add appointment" to request
+                an appointment.</p>
+            <div class="options">
+                <a href="{% url 'base_calendar' %}" class="btn btn-success btn-m" style="color: #316497;background-color: #5CCFCF">
+                    Back to Calendar
+                </a>
+
+                {% if not nurse %}
+                    <a href="{% url 'create_appointment' %}" class="btn btn-success btn-m" style="color: #316497;background-color: #5CCFCF">
+                        Create Appointment
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

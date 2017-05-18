@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <head>
+        <style>
+            .btn-m{
+                background-color: #5CCFCF;
+                color: #316497;
+            }
+
+        </style>
+
+
+
+    </head>
+
+<title>Your Conversations</title>
+
+    <h1>Your Conversations</h1>
+
+    {% if is_empty %}
+        <h4 style="margin-left: 15px">You currently have zero conversations.</h4>
+    {% endif %}
+    <div class="parent">
+        {% for name in names %}
+
+                <div class="list-item"><a href="{% url 'view_conversation' name  %}">{{ name }}</a></div>
+
+        {% endfor %}
+
+
+         <div style="margin-top: 10px"><a id="cancel" class="btn btn-success btn-m"  href="{% url 'message_new' %}">New Message</a></div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

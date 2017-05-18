@@ -1,0 +1,188 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>View Appointments</title>
+
+    <style>
+
+
+        .x a{
+            color: #053563;
+            padding: 0 0 0 0;
+        }
+
+
+        table {
+            width: 95vw;
+            margin: auto;
+            text-align: left;
+        }
+
+        td, th {
+            padding: 10px;
+
+        }
+
+        #reason {
+            width: 30vw;
+        }
+
+        .options {
+            width: 30vw;
+            display: inline;
+        }
+
+
+        p {
+            background-color: #eeeeee;
+            padding: 20px;
+        }li a{
+            display: block;
+                 }
+        li{
+            float: left;
+            margin-bottom: 30px;
+
+        }
+         i{
+            padding-bottom: 5px;
+        }
+        #txte{
+
+            opacity: 0;
+            margin-left: -25px;
+            margin-top: -30px;
+            transition: all 0.5s;
+            background-color: transparent;
+            position:absolute;
+
+                 }
+
+        .x a:hover + #txte{
+             opacity: 1;
+
+        }
+        #txtr{
+            opacity: 0;
+            transition: all 0.5s;
+            background-color: transparent;
+            position:absolute;
+            margin-left: -31px;
+            margin-top: -30px;
+
+                 }
+
+        .x a:hover + #txtr{
+             opacity: 1;
+        }
+        #txta{
+            opacity: 0;
+            transition: all 0.5s;
+            background-color: transparent;
+            position:absolute;
+            margin-left: -35px;
+            margin-top: -30px;
+
+
+                 }
+
+
+
+         .x a:hover + #txta{
+             opacity: 1;
+        }
+        span{
+            margin-right: 20px;
+            padding-top: 0;
+        }#edit{
+            height: 2px;
+            line-height: 2px;
+            vertical-align: middle;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 35px;
+
+        }#reject{
+            height: 2px;
+            line-height: 2px;
+            vertical-align: middle;
+            margin-right: 20px;
+            margin-bottom: 35px;
+        }#accept{
+            height: 2px;
+            line-height: 2px;
+            vertical-align: middle;
+            margin-right: 20px;
+            margin-bottom: 35px;
+        }
+
+
+
+    </style>
+
+
+
+</head>
+
+    <div class="appointments">
+        {% if appointments %}
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Reason</th>
+                    <th>Time</th>
+                    <th>Patient</th>
+                    <th>Status</th>
+                </tr>
+                {% for appt in appointments %}
+                    {% if not appt.isRejected %}
+                       <tr>
+                            <td class="options">
+
+                                <ul class="x" style="display: block; list-style: none">
+                                    <li><a   href="{% url 'edit_appointment' appt.id %}" ><i id="edit" style="background-color: transparent" class="glyphicon glyphicon-edit"></i></a><p id="txte">Edit</p></li>
+                                         <li><a onclick="return confirm('Would you like to reject the appointment?')" href="{% url 'reject_appointment' appt.id %}"><i id="reject" class="glyphicon glyphicon-trash"></i></a><p id="txtr">Reject</p></li>
+                                        {% if not appt.isAccepted %}
+                                         <li><a onclick="return confirm('Would you like to accept the appointment?')" href="{% url 'accept_appointment' appt.id %}" ><i  id="accept" class="glyphicon glyphicon-check"></i></a><p id="txta">Accept</p></li>
+                                    {% endif %}
+                                </ul>
+
+                            </td>
+
+                            <td id="reason">{{ appt.reason }}</td>
+                            <td>{{ appt.timeToString }}</td>
+                            <td>{{ appt.patient }}</td>
+                            <td>{{ appt.accept_state }}</td>
+                        </tr>
+
+                    {% endif %}
+                {% endfor %}
+                <tr>
+                    <td colspan="5" class="options">
+                        <a href="{% url 'base_calendar' %}" class="btn btn-success btn-m" style="color: #316497;background-color: #5CCFCF; margin-top: 30px; margin-bottom: 15px;">
+                            Back to Calendar
+                        </a>
+                        <a href="{% url 'create_appointment' %}" class="btn btn-success btn-m" style=" margin-top: 15px; color: #316497;background-color: #5CCFCF;">
+                            Create Appointment
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+        {% else %}
+            <p>No current appointments. Click on "Add appointment" to add
+                an appointment.</p>
+            <div class="options2">
+                <a href="{% url 'base_calendar' %}" class="btn btn-success btn-m" style="color: #316497;background-color: #5CCFCF; margin-bottom: 15px;">
+                    Back to Calendar
+                </a>
+                <a href="{% url 'create_appointment' %}" class="btn btn-success btn-m" style="color: #316497;background-color: #5CCFCF; ">
+                    Create Appointment
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

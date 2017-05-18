@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Calendar</title>
+<style>
+    ul {
+        list-style-type: none;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    /* Month header */
+
+    .monthHeader {
+        margin: 0;
+        padding: 0;
+        height: 100px;
+        width: 100vw;
+        table-layout: fixed;
+        text-align: center;
+        border-collapse: collapse;
+        background: #1abc9c;
+    }
+
+    .prev, .next , .monthHeader, a.monthHeader{
+        color: white;
+        font-size: 20px;
+        letter-spacing: 3px;
+    }
+
+    .prev a, .next a {
+        color: white;
+    }
+
+    .month {
+        margin: 0;
+        padding: 0;
+        width: 85vw;
+        min-height: 80vh;
+        table-layout: fixed;
+        text-align: center;
+        border-collapse: collapse;
+        float: left;
+    }
+
+    .month td:hover{
+        background-color: #C1F1F1;
+    }
+
+    .month td:active {
+        background-color: #053563;
+    }
+
+    .month td a {
+        color: black;
+    }
+
+    tr {
+        border: 1px solid black;
+    }
+
+    th {
+        padding: 0 10px;
+    }
+
+
+    .days td {
+        border: 1px solid black;
+    }
+
+    .days td a {
+        padding: 55px;
+        margin: -55px;
+    }
+
+    /* Weekdays (Sun-Sat) */
+
+    .weekdays {
+        padding: 10px 0;
+        background-color: #ddd;
+    }
+
+    .weekdays li {
+        display: inline-block;
+        color: #666;
+        text-align: center;
+    }
+
+    /* Days */
+    .days {
+        padding: 10px 0;
+        background: #eee;
+        margin: 0;
+    }
+
+    .today.filled, td.today {
+        border: 4px solid crimson;
+    }
+
+    .filled {
+        color: white !important;
+        background-color: #1abc9c;
+    }
+
+    .pending {
+        background-color: darkgray;
+    }
+
+    .rejected {
+        background-color: indianred;
+    }
+
+    .btn {
+        text-align: center;
+        text-decoration: none;
+        color: white;
+    }
+
+    #key{
+        margin: 10px 10px;
+        float: left;
+    }
+
+    #key ul {
+        margin-top: 10px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .month{
+            width: 100vw;
+        }
+    }
+
+</style>
+
+            <script>
+        $('.messages').hide().fadeIn();
+         setTimeout(function(){$('.messages').fadeOut();}, 5000);
+        $(window).click(function(){$('.messages').fadeOut();});
+        </script>
+
+
+    <table class="monthHeader">
+
+                <tr>
+                    <td class="prev">&#10094;
+                            <a href="{% url 'calendar' prevMonth prevYear %}">
+                            {{ prevMonthName }}
+                        </a>
+                    </td>
+                    <td>{{ month }} {{ year }}</td>
+                    <td class="next">
+                        <a href="{% url 'calendar' nextMonth nextYear %}">
+                            {{ nextMonthName }}
+                        </a>&#10095;
+                    </td>
+                </tr>
+
+
+                    <tr>
+                        <td colspan="3">
+                             <a class="btn btn-success btn-m" style="color: #316497;background-color: #5CCFCF" href="{% url 'create_appointment' %}">Create Appointment</a>
+                        </td>
+                    </tr>
+
+
+            </table>
+
+            {{ month_format }}
+
+            <div id="key">
+                <h4>Calendar color key:</h4>
+                <div id="values">
+                    <ul>
+                        <li class="pending">Pending</li>
+                        <li class="filled">Accepted</li>
+                        {% if not doctor %}
+                            <li class="rejected">Rejected</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+{% endblock %}

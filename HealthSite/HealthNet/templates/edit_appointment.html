@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Edit Appointment</title>
+    <head>
+        <style>
+            .content{
+                width: 100vw;
+            }#cancel{
+                margin-top: 0;
+                         }
+
+            .field {
+            padding: 5px 0;
+            margin-top: 20px;
+        }
+
+        .field h4 {
+            margin-bottom: 10px;
+        }
+
+        </style>
+    </head>
+    <div class="content">
+    <h1 class ="center">Edit Your Appointment</h1>
+    <form id="EditAppointmentForm" class = "form-horizontal" method="POST" action="">
+        {% csrf_token %}
+
+        <div id="fields">
+            <div class="field">
+                <h4>Reason for the appointment</h4>
+                    {{ form.reason.errors }}
+                    {{ form.reason }}
+            </div>
+
+            <div class="field">
+                <h4>Select the time for the appointment</h4>
+                {{ form.appointment_time.errors }}
+                {{ form.appointment_time }}
+            </div>
+
+            <div class="field">
+
+            </div>
+
+            {{ form.doctor.as_hidden }}
+            {{ form.patient.as_hidden }}
+        </div>
+
+
+        <input type="submit" name="submit" class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" value="Save Changes" />
+        <a  id="cancel" href="{% url 'base_calendar' %}" class="btn btn-success btn-m">Cancel</a>
+
+    </form>
+    </div>
+
+{% endblock %}

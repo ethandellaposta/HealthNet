@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="w3.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+       {% load staticfiles %}
+         <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+        <script>
+            $(function () {
+                $(".datetime-input").datetimepicker({
+                    format:'YYYY-MM-DD HH:mm:ss'
+                });
+            });
+        </script>
+        <script>
+
+            $('.messages').hide().fadeIn();
+             setTimeout(function(){$('.messages').fadeOut();}, 5000);
+            $(window).click(function(){$('.messages').fadeOut();});
+
+    </script>
+
+    <style>
+        body, div, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, img, form, fieldset, blockquote {
+    margin:0px; border:0px;
+}
+         body{
+             font-family: "Avenir Next";
+             background-color: #C1F1F1;
+             padding: 0;
+             margin: 0;
+             position: absolute;
+
+         }
+        form{
+            margin-left: 20px;
+            background-color: #C1F1F1;
+        }
+        .btn-m{
+            border-color: #316497;
+        }
+        h3{
+            margin-top: 20px;
+        }
+        .glyphicon-edit{
+            background-color: #5CCFCF;
+        }
+        #edit{
+            background-color: #5CCFCF;
+        }
+
+
+
+        input{
+            margin-bottom: 20px;
+        }
+
+        button{
+            background-color: #5CCFCF;
+        }
+        .spread{
+            margin: 0;
+            background-color: #5CCFCF;
+            padding-bottom: 0;
+            width: 100vw;
+            max-height: 105px;
+            min-height: 105px;
+            border: 1px solid transparent;
+        }
+        h1 {
+            padding-top: 15px;
+            padding-bottom: 30px;
+            padding-left: 0;
+            text-align: center;
+            margin-bottom: 0;
+            color: #053563;
+        }
+
+
+        a:hover {
+            text-decoration: none;
+        }
+
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding-top: 0;
+            overflow: hidden;
+            width: 100vw;
+
+        }
+
+        nav li a {
+            display: block;
+            color: #053563;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        nav li a:hover{
+            background-color: #C1F1F1;
+            text-decoration: none;
+        }
+
+
+        .c {
+            background-color: #C1F1F1;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+        .messages{
+            background-color: lightgreen;
+            opacity: .6;
+            position:relative;
+
+        }
+        .floating{
+            z-index: 1000;
+            float: left;
+            position: absolute;
+            left: 0;
+            top: -20px;
+            background-color: limegreen;
+        }
+        .center{
+            margin: 0;
+            text-align: center;
+        }
+        .links{
+             position:relative;
+             top: -22px;
+             left: -1px;
+            background-color: #2BCBCF;
+        {% if is_calendar %}
+            margin-bottom: -21px;
+        {% endif %}
+            float: left;
+
+        }.mainsite{
+            font-family: Impact;
+        }
+        .glyphicon-ok{
+            padding-left: 15px;
+            padding-right: 15px;
+        }.link{
+            text-decoration: none;
+                 }
+           .list-item {
+            background-color: lightblue;
+            border: 1px solid #C1F1F1;
+            padding: 5px;
+            max-height: none;
+            width: 325px;
+        }
+        .parent{
+            margin-left: 50px;
+            display: flex;
+            flex-direction: column;
+
+
+
+            justify-content: space-around;
+        }#cancel{
+
+            margin-top: 10px;
+            background-color: #5CCFCF;
+            color: #316497;
+            border-color: #316497;
+                 }
+         #welcome{
+             margin-left: 100px;
+
+        }
+         #applist{
+             width: 500px;
+             overflow: auto;
+         }header{
+            font-size: 20px;
+                   }
+
+
+
+a:hover {
+    -webkit-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+
+
+    </style>
+    {% if base %}
+        <title>HealthNet</title>
+    {% endif %}
+
+
+</head>
+<body>
+
+         <div class="spread">
+            {% block header %}
+
+             <h1><a class="mainsite" href="{% url 'base' %}">HealthNet</a></h1>
+
+
+            <div class="links">
+            {% if user.is_anonymous %}
+                <nav>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li><a href="{% url 'patient_new' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    </ul>
+                </nav>
+            {% else %}
+                {% if admin %}
+                    <nav>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li><a href="{% url 'logout_user' %}">Logout</a></li>
+                            <li><a href="{% url 'base' %}">Dashboard</a></li>
+                            <li><a href="{% url 'employees' %}">Employees</a></li>
+                            <li><a href="{% url 'patients' %}">Patients</a></li>
+                            <li><a href="{% url 'message' %}">Messages</a></li>
+                            <li><a href="{% url 'time_entry' %}">System Log</a></li>
+                        </ul>
+                    </nav>
+                {% elif patient %}
+                    <nav>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li><a href="{% url 'logout_user' %}">Logout</a></li>
+                            <li><a href="{% url 'base' %}">Dashboard</a></li>
+                            <li><a href="{% url 'base_calendar' %}">Calendar</a></li>
+                            <li><a href="{% url 'message' %}">Messages</a></li>
+                            <li><a href="{% url 'test_results' %}">Test Results</a></li>
+                            <li><a href="{% url 'patient_info' %}">Account</a></li>
+                        </ul>
+                    </nav>
+                 {% elif user.is_superuser %}
+                    <meta http-equiv="refresh" content="0; URL={% url 'logout_user' %}">
+
+
+                 {% elif doctor %}
+                    <nav>
+                     <ul class="nav nav-tabs" role="tablist">
+                    <li><a href="{% url 'logout_user' %}">Logout</a></li>
+                    <li><a href="{% url 'base' %}">Dashboard</a></li>
+                    <li><a href="{% url 'base_calendar' %}">Calendar</a></li>
+                    <li><a href="{% url 'patient_list' %}">Patients</a></li>
+                     <li><a href="{% url 'message' %}">Messages</a></li>
+                    <li><a href ="{% url 'review_test' %}">Tests</a></li>
+                     </ul>
+                    </nav>
+
+                 {% elif nurse %}
+                    <nav>
+                     <ul class="nav nav-tabs" role="tablist">
+                    <li><a href="{% url 'logout_user' %}">Logout</a></li>
+                    <li><a href="{% url 'base' %}">Dashboard</a></li>
+                    <li><a href="{% url 'base_calendar' %}">Calendar</a></li>
+                    <li><a href="{% url 'patient_list' %}">Patients</a></li>
+                     <li><a href="{% url 'message' %}">Messages</a></li>
+                     </ul>
+                    </nav>
+                 {% else %}
+                    <nav>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li><a href="{% url 'patient_new' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    </ul>
+                </nav>
+                {% endif %}
+           {% endif %}
+            </div>
+         {% endblock %}
+         </div>
+
+
+
+
+
+    <div class="c">
+
+        {% block content %}
+            {% if messages %}
+            <ul style="list-style: none" class="messages">
+            {% for message in messages %}
+                <li class="floating" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<span class="glyphicon glyphicon-ok"></span></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+            {% if user.is_anonymous %}
+
+                 <h1>Welcome to HealthNet!</h1>
+                    <div id="welcome" class="parent">
+                        <p class="list-item" id="msg" style="font-size: 20px;width: 70vw;padding: 10px;">Well hello there. In case you are new, HealthNet simplifies the communication between
+                            yourself and the employees of your hospital and makes it extremely easy to become connected.
+                            Register today in less than 3 minutes!</p>
+                    </div>
+
+
+
+            {% elif user.is_superuser %}
+                <meta http-equiv="refresh" content="0; URL={% url 'logout_user' %}">
+
+                
+            {% elif admin %}
+                <h1 style="margin-top: 20px" class="center">Hello <em>{{ user.first_name }} {{ user.last_name }}!</em></h1>
+
+                  <header style="padding: 25px 0 25px 0; margin-left: 20px;">Recent Hospital Activity:</header>
+                <div class="parent">
+                {% if entries %}
+                    <table class="ur">
+                        <tr>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Time</th>
+
+                        </tr>
+                        {% for ent in entries %}
+                            {% if ent.date >= 24HoursAgo %}
+                                {% if ent.date <= now %}
+                                    <tr>
+                                        <td>{{ ent.requester }}</td>
+                                        <td>{{ ent.action }}</td>
+                                        <td>{{ ent.date }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>No entries.</p>
+                {% endif %}
+
+                  <header style="padding: 25px 0 25px 0;margin-left: -30px">New Messages:</header>
+
+                        <div class="parent">
+
+                        {% if some_m %}
+
+                            {% for m in new_messages %}
+                                <div id="applist" class="list-item" style="margin-left: -50px">
+                                    <strong>{{ m.sender }}</strong> {{ m.msg_content }}
+
+                                </div>
+
+
+                            {% endfor %}
+
+                         {% else %}
+                            <div id="applist" class="list-item" style="margin-left: -50px">
+                                You do not have any new messages.
+                            </div>
+                         {% endif %}
+
+                        </div>
+
+                        {% if transferReqs %}
+                            <header style="padding: 25px 0 25px 0; margin-left: -30px;">Patient Transfer Requests</header>
+                            <div id="applist" class="list-item">
+                                {% for transfer in transferReqs %}
+                                    {% if transfer.is_pending %}
+                                        <p>{{ transfer.description }}</p>
+                                        <p><a href="{% url 'accept_request' transfer.id %}" onclick="return confirm('Would you like to authorize this transfer?')">Accept</a></p>
+                                        <p><a id="rejectTransfer" href="{% url 'reject_request' transfer.id %}" onclick="directRejectRequest({{ transfer.id }})">Reject</a></p>
+
+                                        <script>
+                                            function directRejectRequest () {
+                                                var link = document.getElementById("rejectTransfer");
+                                                if (confirm('Would you like to reject this transfer?')){
+                                                    if( confirm('Provide a reason for rejecting this request?')){
+                                                        link.href = "{% url 'reject_request_reason' transfer.id %}"
+                                                    } else {
+                                                        link.href = "{% url 'reject_request' transfer.id %}"
+                                                    }
+                                                } else {
+                                                    link.href = "{% url 'base' %}"
+                                                }
+                                            }
+                                        </script>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        {% if transferReplies %}
+                            <header style="padding: 25px 0 25px 0; margin-left: 20px;">Patient Transfer Request Updates</header>
+                            <div id="applist" class="list-item" style=" margin-left: 50px;">
+                                {% for reply in transferReplies %}
+                                    <p>{{ reply.acceptance_reply }}: {{ reply.description }}</p>
+                                    {% if reply.acceptance_reply != 'Pending' %}
+                                        <p><a href="{% url 'delete_request' reply.transfer_request.id %}" onclick="return confirm('Would you like to dismiss this information?')">Dismiss</a></p>
+                                    {% endif %}
+                                {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <h1 style="margin-top: 20px" class="center">Hello <em>{{ user.first_name }} {{ user.last_name }}!</em></h1>
+                <h3 class="center" style="color: #555555">Welcome to your dashboard.</h3>
+
+
+
+                    <header style="padding: 25px 0 25px 0; margin-left: 20px;">Upcoming appointments:</header>
+
+
+                        <div class="parent">
+
+                        {% if some %}
+
+                            {% for a in apps %}
+                                <div id="applist" class="list-item">
+                                 Reason: {{ a.reason }}
+                                {% if patient %}
+
+                                          Time: {{ a.appointment_time }}
+                                          with Dr. {{a.doctor.first_name}} {{a.doctor.last_name}}
+                                         (<em>{{ a.accept_state }}</em>)
+
+
+                                {% elif doctor %}
+
+                                          Time: {{ a.appointment_time }}
+                                          with {{a.patient.first_name}} {{a.patient.last_name}}
+                                         (<em>{{ a.accept_state }}</em>)
+                                 {% elif nurse %}
+
+                                          Time: {{ a.appointment_time }} Dr. {{a.doctor.first_name}} {{a.doctor.last_name}}
+                                          with {{a.patient.first_name}} {{a.patient.last_name}}
+                                         (<em>{{ a.accept_state }}</em>)
+                                {% endif %}
+                                </div>
+
+
+                            {% endfor %}
+
+                         {% else %}
+                            <div id="applist" class="list-item">
+                                You do not have any appointments scheduled.
+                            </div>
+
+                         {% endif %}
+
+                        </div>
+
+                    <header style="padding: 25px 0 25px 0; margin-left: 20px;">New Messages:</header>
+
+                        <div class="parent">
+
+                        {% if some_m %}
+
+                            {% for m in new_messages %}
+                                <div id="applist" class="list-item">
+                                    <strong>{{ m.sender }}</strong> {{ m.msg_content }}
+
+                                </div>
+
+
+                            {% endfor %}
+
+                         {% else %}
+                            <div id="applist" class="list-item">
+                                You do not have any new messages.
+                            </div>
+                         {% endif %}
+                     </div>
+
+                    {% if doctor %}
+                        {% if transferReplies %}
+                            <header style="padding: 25px 0 25px 0; margin-left: 20px;">Patient Transfer Request Updates</header>
+                            <div id="applist" class="list-item" style=" margin-left: 50px;">
+                                {% for reply in transferReplies %}
+                                    <p>{{ reply.acceptance_reply }}: {{ reply.description }}</p>
+                                    {% if reply.acceptance_reply != 'Pending' %}
+                                        <p><a href="{% url 'delete_request' reply.transfer_request.id %}" onclick="return confirm('Would you like to dismiss this information?')">Dismiss</a></p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endblock %}
+
+    </div>
+
+</body>
+</html>
+
+

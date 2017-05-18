@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+<style>
+
+
+</style>
+
+{% block content %}
+    <title>Your Patients</title>
+    <h1>Your Patients</h1>
+
+
+    <div class="parent">
+    {% if not is_none %}
+        {% for patient in patients %}
+            <div class="list-item"><a href="{% url 'patient_info_emp' patient.id %}" >{{ patient.first_name }} {{ patient.last_name }}</a></div>
+        {% endfor %}
+    </div>
+     {% if doctor %}
+        <div style="margin-top: 10px; margin-left: 50px;"><a id="cancel" class="btn btn-success btn-m"  href="{% url 'create_transfer_request' %}">Transfer a Patient</a></div>
+     {% endif %}
+    {% else %}
+        <h4>You currently have zero patients.</h4>
+    {% endif %}
+{% endblock %}

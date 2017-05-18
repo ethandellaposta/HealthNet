@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Patients of {{ hosp }}</title>
+    <style>
+        .messages {
+            top: 20px;
+        }
+
+        .actions {
+            margin: 0 10px;
+        }
+
+        #cancel, #transfer {
+            margin-left: 40px;
+            margin-top: 10px;
+            background-color: #5CCFCF;
+            color: #316497;
+            border-color: #316497;
+        }
+
+
+    </style>
+
+      {% if messages %}
+            <ul style="list-style: none" class="messages">
+            {% for message in messages %}
+                <li class="floating" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<span class="glyphicon glyphicon-ok"></span></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+            <script>
+        $('.messages').hide().fadeIn();
+         setTimeout(function(){$('.messages').fadeOut();}, 5000);
+        $(window).click(function(){$('.messages').fadeOut();});
+        </script>
+
+    <h1>Patients of {{ hosp }}</h1>
+    <div class="parent">
+        {% for patient in patients %}
+            <div class="list-item"> {{ patient.first_name }} {{ patient.last_name }} |   {{ patient.username }}
+           <a onclick="return confirm('Would you like to delete this patient account?')" href="{% url 'delete_patient' patient.id %}"  style="color: #316497;">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                </a></div>
+        {% endfor %}
+    </div>
+    <div class="actions">
+        <a class="btn btn-success btn-m" id="cancel" href="{% url 'admin_patient_new' %}">Register Patient</a>
+        <a class="btn btn-success btn-m" id= "transfer" href="{% url 'create_transfer_request' %}">Transfer a patient</a>
+    </div>
+
+
+
+
+
+{% endblock %}

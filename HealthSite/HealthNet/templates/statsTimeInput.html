@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <h1 class="center">Enter Time Frame for Log</h1>
+
+     <form class="form-horizontal" method="POST" action="">
+            {% csrf_token %}
+                <table>
+                    {% for field in form %}
+                        {% ifnotequal field.label ex %}
+                            <tr>
+                                <td>{{ field.label_tag }}{{ field }}</td>
+                                <td>YYYY-MM-DD HH:MM:SS</td>
+                            </tr>
+
+                        {% else %}
+                             <tr><td style="display: none">{{ field.label_tag }}{{ field }}</td></tr>
+                        {% endifnotequal %}
+                    {% endfor %}
+
+                </table>
+
+            <input class="btn btn-success btn-m" style="margin-top: 10px; background-color: #5CCFCF;color: #316497;" type="submit" name="submit" style="background-color: #5CCFCF" value="View Log" />
+            <a class="btn btn-success btn-m" style="margin-top: 10px; background-color: #5CCFCF;color: #316497;" href="{% url 'base' %}">Cancel</a>
+        </form>
+{% endblock %}

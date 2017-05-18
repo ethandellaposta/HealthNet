@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Your Information</title>
+
+<head xmlns:margin-left="http://www.w3.org/1999/xhtml" xmlns:margin-left="http://www.w3.org/1999/xhtml"
+      xmlns:margin-left="http://www.w3.org/1999/xhtml" xmlns:margin-left="http://www.w3.org/1999/xhtml">
+    <style>
+
+
+
+        .edit{
+            padding-top: 20px;
+            justify-content: center;
+            left: 120px;
+        }
+
+
+    </style>
+</head>
+
+{% if user.first_name == '' %}
+    <h1><em>{{ user.username }}</em></h1>
+{% else %}
+    <h1><em>{{ user.first_name }} {{ user.last_name }} <i class="fa fa-user" aria-hidden="true"></i></em></h1>
+{% endif %}
+
+    <div class="parent" style="list-style-type: none">
+        <div class="list-item"><strong>First: </strong>{{ user.first_name }}</div>
+        <div class="list-item"><strong>Last: </strong>{{ user.last_name }}</div>
+        <div class="list-item"><strong>Username: </strong>{{ user.username }}</div>
+        <div class="list-item"><strong>Email: </strong>{{ user.email }}</div>
+        <div class="list-item"><strong>Medical History: </strong>{{ patient.medical_history }}</div>
+        <div class="list-item"><strong>Known Allergies: </strong>{{ patient.known_allergies }}</div>
+        <div class="list-item"><strong>Current Medications: </strong>{{ patient.current_medications }}</div>
+        <div class="list-item"><strong>Medical Conditions: </strong>{{ patient.medical_conditions }}</div>
+        <div class="list-item"><strong>Insurance Information: </strong>{{ patient.insurance_information }}</div>
+        <div class="list-item"><strong>Address: </strong>{{ patient.street }} {{ patient.city }} {{ patient.state }} {{ patient.country }} {{ patient.zip }}</div>
+        <div class="list-item"><strong>Emergency Contact: </strong>{{ patient.emergency_cname }} - {{ enumber }}</div>
+        <div class="list-item"><strong>Hospital: </strong>{{ patient.hospital }}</div>
+        <div class="list-item"><strong>Doctor: </strong>{{ patient.patient_doctor }}</div>
+        <div class="list-item"><strong>Number: </strong>{{ number }}</div>
+        <span>
+            <a style='padding-right:10px' href="{% url 'patient_edit' %}">Edit <i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a style='padding:10px' onclick="return confirm('Are you sure you want to Export your Info?')"href="{% url 'export' %}">
+                Export <i class="fa fa-file-text" aria-hidden="true"></i>
+            </a>
+            <a style='padding:10px' class="edit" href="{% url 'prescriptions' patient.id%}">View Prescriptions
+                <i class="fa fa-folder-open" aria-hidden="true"></i></a>
+        </span>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+    {% extends 'base.html' %}
+        <link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+    {% block content %}
+        <title>Create New Appointment</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        td{
+            left: 30px;
+        }
+
+        .field {
+            padding: 5px 0;
+            margin-top: 20px;
+        }
+
+        .field h4 {
+            margin-bottom: 10px;
+        }
+
+    </style>
+
+        <h1 class="center">Create a New Appointment</h1>
+
+        <form class="form-horizontal" method="POST" action="">
+            {% csrf_token %}
+
+            <div id="fields">
+
+                <div class="field">
+                    <h4>Reason for the appointment</h4>
+                    {{ form.reason.errors }}
+                    {{ form.reason }}
+                </div>
+
+                <div class="field">
+                    {% if patient %}
+                        {{ form.patient.as_hidden }}
+                        <h4>Select the doctor for the appointment</h4>
+                        {{ form.doctor.errors }}
+                        {{ form.doctor }}
+                    {% elif doctor %}
+                        {{ form.doctor.as_hidden }}
+                        <h4>Select the patient for the appointment</h4>
+                        {{ form.patient.errors }}
+                        {{ form.patient }}
+                    {% else %}
+                        <h4>Select the doctor for the appointment</h4>
+                        {{ form.doctor.errors }}
+                        {{ form.doctor }}
+
+                        <h4>Select the patient for the appointment</h4>
+                        {{ form.patient.errors }}
+                        {{ form.patient }}
+                    {% endif %}
+                </div>
+
+                <div class="field">
+                    <h4>Select the time for the appointment</h4>
+                    {{ form.appointment_time.errors }}
+                    {{ form.appointment_time }}&emsp;&emsp;{{ form.appointment_time.help_text }}
+                </div>
+
+            </div>
+
+            <input class="btn btn-success btn-m" style="margin-top: 10px; background-color: #5CCFCF;color: #316497;" type="submit" name="submit" style="background-color: #5CCFCF" value="Create Appointment" />
+            <a class="btn btn-success btn-m" style="margin-top: 10px; background-color: #5CCFCF;color: #316497;" href="{% url 'base_calendar' %}">Cancel</a>
+        </form>
+
+
+
+             {% endblock %}
+
+

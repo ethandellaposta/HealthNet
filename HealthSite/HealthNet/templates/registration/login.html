@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+<title>Login</title>
+
+{% block content %}
+    <head>
+    <style>
+        .loginBox form{
+            background-color: #C1F1F1;
+        }
+    </style>
+    <title>Login to HealthNet</title>
+    </head>
+  <h2 style="margin-left: 20px; margin-top: 30px; margin-bottom: 10px">Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;">Login</button>
+    <a  id="cancel" onclick="history.back(-1)" style="margin-top: 0; margin-left: 10px" class="btn btn-success btn-m">Cancel</a>
+  </form>
+{% endblock %}

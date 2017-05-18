@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Edit Prescription</title>
+    <head>
+        <style>
+            .content{
+                width: 100vw;
+            }
+        </style>
+    </head>
+    <div class="content">
+    <h1 class ="center">Edit Your Prescription</h1>
+    <form id="EditPrescriptionForm" class = "form-horizontal" method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="submit" class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" value="Save Changes" />
+
+                <a class="btn btn-success btn-m" style="background-color: #5CCFCF;color: #316497;" href="{% url 'prescriptions' patient1.id %}">Cancel</a>
+
+    </form>
+    </div>
+
+{% endblock %}

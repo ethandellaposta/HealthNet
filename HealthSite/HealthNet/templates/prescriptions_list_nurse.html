@@ -1,0 +1,67 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>View Prescriptions</title>
+    <style>
+        table {
+            width: 90vw;
+            margin: auto;
+            text-align: left;
+        }
+        td, th {
+            padding: 10px;
+        }
+        #description {
+            width: 30vw;
+        }
+        #options {
+            width: 30vw;
+        }
+        p {
+            background-color: #eeeeee;
+            padding: 20px;
+        }
+    </style>
+
+</head>
+    <div class="prescriptions">
+        <table class="prescriptionsHeader">
+            <tr>
+                    <td>
+                         <a href="{% url 'patient_info_emp' patient1.id %}" id="edit" class="btn btn-success btn-m" style="color: #316497">Back to Patient</a>
+                    </td>
+                </tr>
+        </table>
+        {% if prescriptions %}
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Prescription Name</th>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Date Prescribed</th>
+                </tr>
+                {% for prescrip in prescriptions %}
+                    <tr>
+                        <td id="options">
+                            <span>
+                                <a href="{% url 'review_prescription' prescrip.id %}"  id="edit" class="btn btn-success btn-m" style="color: #316497">
+                                    Details <span class="glyphicon glyphicon-info-sign"></span>
+                                </a>
+                            </span>
+                        </td>
+                        <td id="reason">{{ prescrip.prescription_name }}</td>
+                        <td>{{ prescrip.patientAssigned }}</td>
+                        <td>{{ prescrip.doctorAssigned }}</td>
+                        <td>{{ prescrip.datePrescribed }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No current prescriptions.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

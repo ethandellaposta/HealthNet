@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <title>Employees of {{ hosp }}</title>
+    <style>
+        .messages{
+            top: 20px;
+        }.body{
+            margin-left: -40px;
+                 }
+
+
+    </style>
+      {% if messages %}
+            <ul style="list-style: none" class="messages">
+            {% for message in messages %}
+                <li class="floating" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<span class="glyphicon glyphicon-ok"></span></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+            <script>
+        $('.messages').hide().fadeIn();
+         setTimeout(function(){$('.messages').fadeOut();}, 5000);
+        $(window).click(function(){$('.messages').fadeOut();});
+        </script>
+    <div class="body">
+        <h1>Employees of {{ hosp }}</h1>
+
+        <h4 style="padding: 0 0 20px 25px;margin-left: 75px">Doctors</h4>
+        <div class="parent" style="list-style: none; padding-left: 50px;">
+            {% for doctor in doctors %}
+               <div class="list-item">Dr. {{ doctor.first_name }} {{ doctor.last_name }}   |   {{ doctor.username }}
+                                    <a onclick="return confirm('Would you like to delete this doctor account?')" href="{% url 'delete_doctor' doctor.id %}"  style="color: #316497;">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    </a></div>
+            {% endfor %}
+        </div>
+            <a style="margin-left: 100px" id="cancel" class="btn btn-success btn-m"  href="{% url 'doctor_new' %}">Register Doctor</a>
+
+
+
+
+        <hr>
+
+        <h4 style="padding: 0 0 20px 25px;margin-left: 75px">Nurses</h4>
+        <div class="parent" style="list-style: none; padding-left: 50px;">
+            {% for nurse in nurses %}
+
+               <div class="list-item"> {{ nurse.first_name }} {{ nurse.last_name }}   |   {{ nurse.username }}
+               <a onclick="return confirm('Would you like to delete this nurse account?')" href="{% url 'delete_nurse' nurse.id %}"  style="color: #316497;">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    </a></div>
+            {% endfor %}
+        </div>
+            <a style="margin-left: 100px" id="cancel" class="btn btn-success btn-m" href="{% url 'nurse_new' %}">Register Nurse</a>
+
+
+         <hr>
+
+         <h4 style="padding: 0 0 20px 25px;margin-left: 75px">Admins</h4>
+        <div class="parent" style="list-style: none; padding-left: 50px;">
+            {% for admin in admins %}
+               <div class="list-item"> {{ admin.first_name }} {{ admin.last_name }}   |   {{ admin.username }}
+               <a onclick="return confirm('Would you like to delete this admin account?')" href="{% url 'delete_admin' admin.id %}"  style="color: #316497;">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    </a></div>
+            {% endfor %}
+        </div>
+            <a style="margin-left: 100px" id="cancel" class="btn btn-success btn-m" href="{% url 'admin_new' %}">Register Admin</a>
+    </div>
+
+
+
+
+
+{% endblock %}

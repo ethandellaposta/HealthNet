@@ -1,0 +1,44 @@
+
+    {% extends 'base.html' %}
+    {% block content %}
+        <title>New Patient</title>
+        <head>
+            <style>
+                .content{
+                    width: 100vw;
+                }
+
+
+
+            </style>
+
+        </head>
+        <div class="content">
+        {% if not admin %}
+        <h1>Register with HealthNet</h1>
+        {% else %}
+          <h1>Register new Patient</h1>
+
+        {% endif %}
+
+
+
+         <form class="form-horizontal" method="POST" action="">
+            {% csrf_token %}
+                <table>
+                    {% for field in form %}
+                        {% ifnotequal field.label ex %}
+                            <tr><td>{{ field.label_tag }}{{ field }}</td>{% if not admin %}<td>{{ field.help_text }}{% endif %}</td></tr>
+
+                        {% else %}
+                             <tr><td style="display: none">{{ field.label_tag }}{{ field }}</td></tr>
+                        {% endifnotequal %}
+                    {% endfor %}
+
+                </table>
+                <input class="btn btn-success btn-m" style="margin-top: 10px; background-color: #5CCFCF;color: #316497;" type="submit" name="submit" style="background-color: #5CCFCF" value="Register" />
+                <a  id="cancel" onclick="history.back(-1)" class="btn btn-success btn-m">Cancel</a>
+         </form>
+        </div>
+
+    {% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>{{ other_name }}</title>
+    <style>
+        #nm{
+            margin-top: 10px;
+        }
+        #msg{
+                 white-space: pre-wrap;
+            padding:  5px;
+            overflow: auto;
+
+                 }
+        #you{
+            border: 1px solid #b3ccff;
+            margin-bottom: 2px;
+
+        }#them{
+            border: 1px solid #BBBBBB;
+            margin-bottom: 2px;
+        }
+        #back{
+            margin-top: 10px;
+            margin-left: 50px;
+            margin-bottom: 10px;
+        }#reply{
+            background-color: #5CCFCF;
+            color: #316497;
+            border-color: #316497;
+            margin-top: 10px;
+            margin-left: 50px;
+                 }
+
+
+
+
+    </style>
+
+    <h1> You and {{ other_name }}</h1>
+
+    <a href="{% url 'message' %}" class="btn btn-success btn-m" id="back" style="color: #316497;background-color: #5CCFCF">
+                    <i class="fa fa-chevron-left"></i>    Back
+                </a>
+    {% for message in messages %}
+        <div class="parent">
+        {% if message in you %}
+            <div id="you" class="list-item" style="background-color: #80aaff">
+                <p>You:</p>
+                <p id="msg" style="background-color: white">{{ message.msg_content }}</p></div>
+        {% else %}
+            <div id="them" class="list-item" style="background-color: #999999">
+                <p>{{ message.sender }}:</p>
+                <p id="msg" style="background-color: white">{{ message.msg_content }}</p>
+            </div>
+        {% endif %}
+        </div>
+
+    {% endfor %}
+
+    <a  id="reply" class="btn btn-success btn-m"  href="{% url 'reply' other_user %}">Reply</a>
+
+
+
+
+{% endblock %}
